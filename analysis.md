@@ -129,44 +129,44 @@ To use it:
 
 To determine the optimal number of clusters for K-Means, we utilized both the Elbow Method and Silhouette Scores.
 
-![Elbow Method Plot](elbow_method_for_optimal_k.png)
+![Elbow Method Plot](images/elbow_method_for_optimal_k.png)
 *Figure 1: Elbow Method for K-Means Clustering*
 
-![Silhouette Score Plot](silhouette_scores_for_optimal_k.png)
+![Silhouette Score Plot](images/silhouette_scores_for_optimal_k.png)
 *Figure 2: Silhouette Scores for Different K Values*
 
 ## Cluster Interpretation and Scoring Logic
 
 We identified 5 distinct clusters based on their behavioral patterns. The heatmap below illustrates the mean scaled values for each feature across these clusters, providing insights into their unique characteristics.
 
-![Cluster Characteristics Heatmap](cluster_characteristics.png)
+![Cluster Characteristics Heatmap](images/cluster_characteristics.png)
 *Figure 3: Mean Scaled Feature Values per Cluster*
 
 
 Cluster Interpretation and Scoring Logic
 We identified 5 distinct clusters based on their behavioral patterns. The heatmap (refer to Figure X: Mean Scaled Feature Values per Cluster in your analysis.md) illustrates the mean scaled values for each feature across these clusters, providing insights into their unique characteristics. To further elaborate on the defining aspects of each cluster, the following figures highlight the top 5 most distinctive scaled features.
 
-Cluster 0: The Baseline/Infrequent Users (Score Range: [200-399]) ![Distinctive Features for Cluster 0](clusture_0.png)
+Cluster 0: The Baseline/Infrequent Users (Score Range: [200-399]) ![Distinctive Features for Cluster 0](images/clusture_0.png)
 Characteristics: This is the largest cluster, representing the majority of users. As shown in Figure 1: Top 5 Distinctive Scaled Features for Cluster 0, its most distinctive features (active_days, count_deposit, count_borrow, count_repay, duration_days) are all significantly below the overall average (indicated by negative scaled values). This signifies that wallets in this cluster exhibit low overall activity, infrequent transactions, and smaller transaction counts across all actions (deposits, borrows, repays). They are likely casual or inactive users.
 
 Scoring Rationale: Given their low engagement and minimal contribution to the Aave V2 ecosystem, these wallets are assigned a lower-mid credit score range, reflecting a basic level of participation without significant depth or consistent activity.
 
-Cluster 1: The Ultra-High Volume Transactors (Score Range: [600-799])![Distinctive Features for Cluster 1](clusture_1.png)
+Cluster 1: The Ultra-High Volume Transactors (Score Range: [600-799])![Distinctive Features for Cluster 1](images/clusture_1.png)
 Characteristics: This cluster contains a very small number of wallets but represents extremely high-value activity. As depicted in Figure 2: Top 5 Distinctive Scaled Features for Cluster 1, its defining features are exceptionally high total_repay_amount, std_repay_amount, avg_repay_amount, total_redeem_amount, and std_borrow_amount. The extremely large positive scaled values (e.g., over 40 for total_repay_amount) indicate that these wallets perform massive transactions, particularly in terms of repayments and redemptions. They are likely institutional participants or whales moving significant capital. While redeem actions are present, the sheer scale of their overall financial activity, including repayments, suggests highly active and engaged, albeit potentially transient, capital.
 
 Scoring Rationale: Despite being few in number, these wallets contribute enormous liquidity and transaction volume. Their participation, especially large repayments, demonstrates significant financial capacity and active management, warranting a high credit score.
 
-Cluster 2: The Consistently Active & Long-Term Users (Score Range: [400-599])![Distinctive Features for Cluster 2](clusture_2.png)
+Cluster 2: The Consistently Active & Long-Term Users (Score Range: [400-599])![Distinctive Features for Cluster 2](images/clusture_2.png)
 Characteristics: This cluster comprises a moderate number of wallets. Figure 3: Top 5 Distinctive Scaled Features for Cluster 2 shows that their most distinctive features are active_days, count_deposit, count_borrow, count_repay, and duration_days, all with strong positive scaled values (around 2 to 3). This indicates users who are consistently active over an extended period, performing a significant number of deposits, borrows, and repays. Their activity is notable for its frequency and duration rather than necessarily extreme individual transaction sizes.
 
 Scoring Rationale: These wallets show reliable and sustained engagement with the protocol. Their consistent activity and participation in core DeFi actions make them valuable users, thus receiving a solid mid-range credit score.
 
-Cluster 3: The High-Volume Borrowers (Score Range: [800-1000])![Distinctive Features for Cluster 3](clusture_3.png)
+Cluster 3: The High-Volume Borrowers (Score Range: [800-1000])![Distinctive Features for Cluster 3](images/clusture_3.png)
 Characteristics: This is another small but impactful cluster. As shown in Figure 4: Top 5 Distinctive Scaled Features for Cluster 3, its key defining features are an exceptionally high net_borrow_repay, total_borrow_amount, total_deposit_amount, std_borrow_amount, and avg_borrow_amount. The net_borrow_repay being extremely high positive indicates these users are primarily net borrowers with significant outstanding debt relative to repayments. However, their total_deposit_amount and total_borrow_amount are also very high, suggesting they are major players who deposit substantial collateral to take out large loans.
 
 Scoring Rationale: Wallets in this cluster represent major liquidity consumers within the Aave ecosystem. Their substantial borrowing activity, backed by significant deposits, is a sign of deep engagement and trust in the protocol, making them critical users from a protocol's perspective. This justifies the highest credit score range, even if their net_borrow_repay is positive.
 
-Cluster 4: The High-Frequency Redeemers/Churners (Score Range: [0-199])![Distinctive Features for Cluster 4](clusture_4.png)
+Cluster 4: The High-Frequency Redeemers/Churners (Score Range: [0-199])![Distinctive Features for Cluster 4](images/clusture_4.png)
 Characteristics: This cluster consists of a very small number of wallets (in this dataset, just one). Figure 5: Top 5 Distinctive Scaled Features for Cluster 4 vividly illustrates its unique profile, dominated by extremely high count_redeemunderlying, total_transactions, redeem_to_deposit_ratio, and transactions_per_day. The redeem_to_deposit_ratio is particularly high, while the total deposit amounts themselves might be low (as seen in the earlier overall cluster means). This suggests a pattern of frequent, possibly small deposits followed by rapid and extensive redemptions, indicating a less "sticky" or even potentially exploitative/arbitrage-focused behavior rather than long-term engagement.
 
 Scoring Rationale: Given the defining characteristic of high redemption frequency and ratio relative to deposits, these wallets are assigned the lowest credit score range. This reflects a behavior pattern that may not contribute positively to the protocol's long-term liquidity or stability, indicating higher potential churn or specific, short-term strategies.
